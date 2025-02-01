@@ -1,46 +1,37 @@
 # Installation and Configuration Guide: Docker, OHDSI Broadsea, and PostgreSQL on Docker
 
-## 1. Installing Docker on WSL2
+## 1. Installing Docker
 
 ### Step 1: Install Docker
 
 Follow the official Docker installation guide for your system: [Docker Installation Guide](https://docs.docker.com/get-docker/)
 
-### Step 2: Update Package List and Install Required Packages
+## 3. Installing OHDSI Broadsea
+
+### Step 1: Clone OHDSI Broadsea Repository
 
 ```bash
-sudo apt-get update
-sudo apt-get install     apt-transport-https     ca-certificates     curl     gnupg     lsb-release
+git clone https://github.com/OHDSI/Broadsea.git
+cd Broadsea
 ```
 
-### Step 3: Add Docker’s Official GPG Key and Repository
+### Step 2: Set Up Environment Variables
+
+Edit `.env` file to update configuration parameters for WebAPI, ATLAS, and database connections.
+
+### Step 3: Start OHDSI Broadsea Containers
 
 ```bash
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-echo   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+docker-compose up -d
 ```
 
-### Step 4: Install Docker Engine
+### Step 4: Verify Running Containers
 
 ```bash
-sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io
+docker ps
 ```
 
-### Step 5: Configure Docker Permissions
 
-```bash
-sudo usermod -aG docker $USER
-```
-
-Log out and log back in for changes to take effect.
-
-### Step 6: Start and Verify Docker Service
-
-```bash
-sudo service docker start
-sudo service docker status
 ```
 
 ## 2. Installing PostgreSQL on Docker
@@ -71,30 +62,6 @@ docker run -p 8765:80 -e PGADMIN_DEFAULT_EMAIL=<youremailaddress> -e PGADMIN_DEF
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <containerID>
 ```
 
-## 3. Installing OHDSI Broadsea
-
-### Step 1: Clone OHDSI Broadsea Repository
-
-```bash
-git clone https://github.com/OHDSI/Broadsea.git
-cd Broadsea
-```
-
-### Step 2: Set Up Environment Variables
-
-Edit `.env` file to update configuration parameters for WebAPI, ATLAS, and database connections.
-
-### Step 3: Start OHDSI Broadsea Containers
-
-```bash
-docker-compose up -d
-```
-
-### Step 4: Verify Running Containers
-
-```bash
-docker ps
-```
 
 ### Step 5: Configure WebAPI
 
