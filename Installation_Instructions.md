@@ -4,7 +4,7 @@
 
 Follow the official Docker installation guide for your system: [Docker Installation Guide](https://docs.docker.com/get-docker/)
 
-## 3. Installing OHDSI Broadsea
+## 2. Installing OHDSI Broadsea
 
 OHDSI Broadsea is a Docker-based solution for deploying the OHDSI tool stack, including ATLAS and WebAPI, in a containerized environment. It simplifies the deployment and management of OHDSI components, making it easier to integrate with various database systems and analytical tools.
 
