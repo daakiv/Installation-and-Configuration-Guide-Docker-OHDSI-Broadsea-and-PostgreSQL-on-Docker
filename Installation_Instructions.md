@@ -9,8 +9,8 @@ A comprehensive guide to deploying the OHDSI ecosystem using Docker. Includes Po
 ---
 
 ## Table of Contents
-1. [Prerequisites](## Prerequisites)
-2. [Docker Installation(## 1. Docker Installation)
+1. [Prerequisites](#Prerequisites)
+2. [Docker Installation(#Docker Installation)
 3. [OHDSI Broadsea Setup](#ohdsi-broadsea-seupt)
 4. [PostgreSQL Management](#postgresql-management)
 5. [Data Migration](## 4. Database Backup and Restoration in Docker)
