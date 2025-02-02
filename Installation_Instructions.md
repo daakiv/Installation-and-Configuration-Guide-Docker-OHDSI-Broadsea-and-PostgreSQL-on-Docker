@@ -30,6 +30,8 @@ A comprehensive guide to deploying the OHDSI ecosystem using Docker. Includes Po
 ### Ubuntu Users
 If you are using Ubuntu natively (not via WSL), ensure you have an updated system before proceeding with the installation steps below.
 
+> [!IMPORTANT] 
+> Ensure that you have administrative privileges on your system before proceeding with the installation.
 
 ---
 
@@ -102,8 +104,12 @@ sudo service docker start
 ```bash
 sudo service docker status
 ```
+> [!TIP] 
+> If you encounter issues with Docker installation, refer to the official [Docker Troubleshooting Guide](https://docs.docker.com/get-docker/) for support.
 
-Follow the official Docker installation guide for your system: [Docker Installation Guide](https://docs.docker.com/get-docker/)
+> [!NOTE] 
+> It is recommended to periodically update your Docker images and containers to ensure security and performance improvements.
+
 
 ## 2. Installing OHDSI Broadsea
 
