@@ -7,31 +7,34 @@
 A comprehensive guide to deploying the OHDSI ecosystem using Docker. Includes PostgreSQL configuration, data migration workflows, and WebAPI setup.
 
 ---
-test
 ## Table of Contents
-1. [Prerequisites](#Prerequisites)
-2. [Docker Installation(#Docker Installation)
-3. [OHDSI Broadsea Setup](#ohdsi-broadsea-seupt)
-4. [PostgreSQL Management](#postgresql-management)
-5. [Data Migration](## 4. Database Backup and Restoration in Docker)
-6. [WebAPI Configuration](#webapi-configuration)
+1. [Prerequisites](#prerequisites)
+2. [Docker Installation](#docker-installation)
+3. [OHDSI Broadsea Setup](#ohdsi-broadsea-setup)
+4. [PSQL Installation](#postgresql-installation)
+5. [Data Migration](#data-migration)
 7. [Troubleshooting](#troubleshooting)
 8. [License](#license)
-## 4. Database Backup and Restoration in Docker
+
 ---
 
 
 ## Prerequisites
 
 ### Windows Users
-1. Install WSL2: [Official Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
-2. Install Ubuntu 22.04 from Microsoft Store as the preferred WSL distribution.
+1. **Install WSL2**: [Official Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
+2. **Install Ubuntu 22.04** from the Microsoft Store (preferred WSL distribution).
 
 ### Ubuntu Users
-If you are using Ubuntu natively (not via WSL), ensure you have an updated system before proceeding with the installation steps below.
+If you're using Ubuntu natively (not via WSL), ensure your system is up to date before proceeding with the installation steps.
 
-> [!IMPORTANT] 
-> Ensure that you have administrative privileges on your system before proceeding with the installation.
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+> **Note:**  
+> Ensure you have administrative privileges on your system before proceeding with the installation.
+
 
 ---
 
