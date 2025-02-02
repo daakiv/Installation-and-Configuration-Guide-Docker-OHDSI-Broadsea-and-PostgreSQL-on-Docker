@@ -13,8 +13,8 @@ A comprehensive guide to deploying the OHDSI ecosystem using Docker. Includes Po
 3. [OHDSI Broadsea Setup](#ohdsi-broadsea-setup)
 4. [PSQL Installation](#postgresql-installation)
 5. [Data Migration](#data-migration)
-7. [Troubleshooting](#troubleshooting)
-8. [License](#license)
+6. [Troubleshooting](#troubleshooting)
+7. [License](#license)
 
 ---
 
@@ -231,3 +231,13 @@ psql -U postgres -d postgres -f /tmp/mydatabase.sql
 
 
 ---
+## Troubleshooting
+
+For common troubleshooting steps, consult the [Docker Troubleshooting Guide](https://docs.docker.com/get-docker/) and the [OHDSI Broadsea GitHub Issues page](https://github.com/OHDSI/Broadsea/issues).
+
+---
+
+## License
+
+This project is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
