@@ -9,19 +9,19 @@ A comprehensive guide to deploying the OHDSI ecosystem using Docker. Includes Po
 ---
 
 ## Table of Contents
-1. [Prerequisites](#Prerequisites)
-2. [Docker Installation](#Docker Installation)
-3. [OHDSI Broadsea Setup](#ohdsi-broadsea-setup)
+1. [Prerequisites](## Prerequisites)
+2. [Docker Installation(## 1. Docker Installation)
+3. [OHDSI Broadsea Setup](#ohdsi-broadsea-seupt)
 4. [PostgreSQL Management](#postgresql-management)
-5. [Data Migration](#data-migration)
+5. [Data Migration](## 4. Database Backup and Restoration in Docker)
 6. [WebAPI Configuration](#webapi-configuration)
 7. [Troubleshooting](#troubleshooting)
 8. [License](#license)
-
+## 4. Database Backup and Restoration in Docker
 ---
 
 
-## Prerequisites <a name="prerequisites"></a>
+## Prerequisites
 
 ### Windows Users
 1. Install WSL2: [Official Installation Guide](https://learn.microsoft.com/en-us/windows/wsl/install)
@@ -35,7 +35,7 @@ If you are using Ubuntu natively (not via WSL), ensure you have an updated syste
 
 ---
 
-## 1. Docker Installation <a name="docker-installation"></a>
+## 1. Docker Installation
 Follow the guide below to install Docker on your system. For additional details, refer to the official [Docker Installation Guide](https://docs.docker.com/get-docker/).
 
 ### Step 1:  Update Package Index
@@ -226,10 +226,5 @@ psql -U postgres -d postgres -f /tmp/mydatabase.sql
 ```
 > **Note:** For large databases, use `pg_restore` with parallel jobs for better performance.
 
-### Step 5: Apply Schema in Docker Database
-```bash
-docker exec -it broadsea-atlasdb psql -U postgres -d postgres -f /var/lib/postgresql/data/mydatabase.sql
-```
-> **Caution:** Always verify schema compatibility before applying database dumps in a production environment.
 
 ---
