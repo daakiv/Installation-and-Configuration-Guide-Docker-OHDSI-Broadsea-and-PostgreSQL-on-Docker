@@ -110,6 +110,7 @@ sudo service docker status
 > [!NOTE] 
 > It is recommended to periodically update your Docker images and containers to ensure security and performance improvements.
 
+---
 
 ## 2. Installing OHDSI Broadsea
 
@@ -183,81 +184,52 @@ After starting the necessary containers, retrieve the IP address of the ATLAS Da
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' XXXXXXXX(Insert ATLAS DB containerID-atlas db ID not pgadmin4) --inspect to find atlas db ip address
 
 ```
+---
 
 
 ## 4. Database Backup and Restoration in Docker
 
-### Step 1: Dump Local Database
-
+### Step 1: Dump Local Database from the Host Machine
 ```bash
-set PGPASSWORD=password
-pg_dump -U postgres -d mydatabase -F c -f "C:\Users\Amadi\OneDrive\Desktop\HP\data\backup\mydatabase.backup"
+pg_dump -U postgres -d mydatabase -F c -f "/path/on/host/machine/mydatabase.sql"
 ```
 
-### Step 2: Transfer Backup File to Docker Container
+### Step 2: Copy Backup File to Docker Container
 
+#### Find PostgreSQL Container Name
 ```bash
-docker cp "C:\Users\Amadi\OneDrive\Desktop\HP\data\backup\mydatabase.backup" postgres:/tmp/
+docker ps
+```
+Example:
+```bash
+docker exec -it broadsea-atlasdb bash
 ```
 
-### Step 3: Restore Database in Docker
-
+#### Copy File to Container (Windows)
 ```bash
-docker exec -it postgres psql -U postgres -d mydatabase -f /tmp/mydatabase.backup
+docker cp "C:\path\on\host\machine\mydatabase.sql" broadsea-atlasdb:/tmp/
 ```
 
-### Step 4: Verify Data Import
-
+#### Copy File to Container (Ubuntu/WSL)
 ```bash
-docker exec -it postgres psql -U postgres -d mydatabase -c "\dt"
+docker cp /mnt/c/path/on/host/machine/mydatabase.sql broadsea-atlasdb:/var/lib/postgresql/data/
 ```
 
-## 5. Moving Data from Windows to Docker and Uploading to an Existing Database
-
-### Step 1: Dump Schema Only
-
+### Step 3: Verify Backup in Docker
 ```bash
-pg_dump -U postgres -d mydatabase -F p -f "path\mydatabase_schema.sql" -n my_schema
+docker exec -it broadsea-atlasdb ls /tmp
 ```
 
-### Step 2: Transfer Schema File to Docker
-
+### Step 4: Restore Database in Docker
 ```bash
-docker cp "path\mydatabase_schema.sql" postgres:/tmp/
+psql -U postgres -d postgres -f /tmp/mydatabase.sql
 ```
+> **Note:** For large databases, use `pg_restore` with parallel jobs for better performance.
 
-### Step 3: Apply Schema in Docker Database
-
+### Step 5: Apply Schema in Docker Database
 ```bash
-docker exec -it postgres psql -U postgres -d mydatabase -f /tmp/mydatabase_schema.sql
+docker exec -it broadsea-atlasdb psql -U postgres -d postgres -f /var/lib/postgresql/data/mydatabase.sql
 ```
-
-## 6. Configuring Broadsea WebAPI
-
-### Step 1: Add New CDM Source
-
-- Update the `source` table to register the CDM database.
-
-### Step 2: Update Source Daimon Table
-
-```bash
-INSERT INTO source_daimon (source_id, daimon_type, table_qualifier) VALUES (1, 1, 'cdm_database');
-```
-
-### Step 3: Restart OHDSI Containers
-
-```bash
-docker-compose restart
-```
-
-## 7. Best Practices and Troubleshooting
-
-- **Check Logs:** `docker logs <container_name>`
-- **Verify Network:** `docker network inspect broadsea_default`
-- **Check Running Containers:** `docker ps`
-- **Database Connectivity:** Ensure correct database host (use `docker inspect` to find the IP of the container instead of `localhost`).
+> **Caution:** Always verify schema compatibility before applying database dumps in a production environment.
 
 ---
-
-This guide ensures a clear step-by-step installation and configuration process for Docker, OHDSI Broadsea, PostgreSQL on Docker, and database migrations. Let me know if you'd like additional clarifications or improvements!
-
